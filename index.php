@@ -1,3 +1,10 @@
+<?php 
+session_start();
+include 'db.php';
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +27,7 @@
     </nav>
     <section>
         <div class="sidebar">
-            <p class="active">Tous les produits</p>
+            <p class="active" id="tousLesProduits">Tous les produits</p>
 
             <button class="dropdown-btn" onclick="toggleDropdown()">Catégories de produits
                 <i class="fa fa-caret-down"></i>
@@ -31,7 +38,35 @@
                 <p>Categorie 3</p>
             </div>
             <p>Les produits en rupture de stock</p>
+        </div>
 
+        <div class="main-content" id="productList">
+            <?php 
+              $query="SELECT * FROM produit";
+              $statement=$pdo->prepare($query);
+              $statement->execute();
+              $result=$statement->fetchAll();
+              if($result){
+                    foreach($result as $row){
+                        ?>
+                            <div class="product">
+                                <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300" height="300">
+                                <p>Libelle:<?= $row['libelle'] ?></p>
+                                <p>Reference:<?= $row['ref_prod'] ?></p>
+                                <p>Prix unitaire:<?= $row['pru'] ?></p>
+                                <p>Quantité minimale:<?= $row['qte_min'] ?></p>
+                                <p>Quantité stock:<?= $row['qte_stock'] ?></p>
+                            </div>
+                            
+                        <?php
+                    }
+                }
+              else{
+                ?>
+                <p>no record found</p>
+                <?php
+              }
+            ?>
         </div>
     </section>
 

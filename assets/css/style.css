@@ -99,3 +99,8 @@ nav div {
   color: white;
   cursor: pointer;
 }
+/* product div */
+.product{
+  border: 2px black solid;
+
+}
