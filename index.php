@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include 'db.php';
 
@@ -19,53 +19,91 @@ include 'db.php';
 
 <body class="body-home">
     <nav>
-        <img src="assets/imgs/logo.png" alt="logo" height="60" width="300">
+        <div class="logo">
+        <img src="assets/imgs/logo1.png" alt="logo" height="60" width="60"><p>ElectroNacer</p>
+        </div>
+       
         <div>
             <p>+212601020304</p>
             <p>electro_nacer@gmail.com</p>
         </div>
     </nav>
-    <section>
+    <section class="wrapper">
         <div class="sidebar">
-            <p class="active" id="tousLesProduits">Tous les produits</p>
 
-            <button class="dropdown-btn" onclick="toggleDropdown()">Catégories de produits
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                <p>Categorie 1</p>
-                <p>Categorie 2</p>
-                <p>Categorie 3</p>
-            </div>
-            <p>Les produits en rupture de stock</p>
+            <select id="categories" name="categories" onchange="filterProducts()">
+                <option value="tout">Tout les produits</option>
+                <option value="1">cartes de developpement</option>
+                <option value="2">capteurs</option>
+                <option value="3">composants electroniques</option>
+            </select>
+
+            <p><a href="?showOutOfStock=true">Les produits en rupture de stock</a></p>
+            <p>Déconnexion</p>
         </div>
 
         <div class="main-content" id="productList">
-            <?php 
-              $query="SELECT * FROM produit";
-              $statement=$pdo->prepare($query);
-              $statement->execute();
-              $result=$statement->fetchAll();
-              if($result){
-                    foreach($result as $row){
+            <?php
+            $query = "SELECT * FROM produit";
+            $statement = $pdo->prepare($query);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            if ($result) {
+                foreach ($result as $row) {
+                    $isOutOfStock = $row['qte_stock'] <= $row['qte_min'];
+                    if (isset($_GET['showOutOfStock']) && $_GET['showOutOfStock'] == 'true' && $isOutOfStock) {
                         ?>
-                            <div class="product">
-                                <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300" height="300">
-                                <p>Libelle:<?= $row['libelle'] ?></p>
-                                <p>Reference:<?= $row['ref_prod'] ?></p>
-                                <p>Prix unitaire:<?= $row['pru'] ?></p>
-                                <p>Quantité minimale:<?= $row['qte_min'] ?></p>
-                                <p>Quantité stock:<?= $row['qte_stock'] ?></p>
-                            </div>
-                            
+
+                        <div class="product category-<?= $row['fk_idCat'] ?>">
+                            <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300"
+                                height="300">
+                            <p>Libelle:
+                                <?= $row['libelle'] ?>
+                            </p>
+                            <p>Reference:
+                                <?= $row['ref_prod'] ?>
+                            </p>
+                            <p>Prix unitaire:
+                                <?= $row['pru'] ?>
+                            </p>
+                            <p>Quantité minimale:
+                                <?= $row['qte_min'] ?>
+                            </p>
+                            <p>Quantité stock:
+                                <?= $row['qte_stock'] ?>
+                            </p>
+                        </div>
+
+                        <?php
+                    } elseif (!isset($_GET['showOutOfStock']) && !$isOutOfStock) {
+                        ?>
+                        <div class="product category-<?= $row['fk_idCat'] ?>">
+                            <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300"
+                                height="300">
+                            <p>Libelle:
+                                <?= $row['libelle'] ?>
+                            </p>
+                            <p>Reference:
+                                <?= $row['ref_prod'] ?>
+                            </p>
+                            <p>Prix unitaire:
+                                <?= $row['pru'] ?>
+                            </p>
+                            <p>Quantité minimale:
+                                <?= $row['qte_min'] ?>
+                            </p>
+                            <p>Quantité stock:
+                                <?= $row['qte_stock'] ?>
+                            </p>
+                        </div>
                         <?php
                     }
                 }
-              else{
+            } else {
                 ?>
                 <p>no record found</p>
                 <?php
-              }
+            }
             ?>
         </div>
     </section>
@@ -75,7 +113,9 @@ include 'db.php';
 
 
 
-
+    <footer>
+        <p>copyright ElectroNAcer 2023</p>
+    </footer>
 
 
 
