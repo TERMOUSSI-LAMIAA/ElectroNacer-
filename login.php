@@ -23,9 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             header("Location: index.php");
             exit();
-        } else {
-            echo "Invalid username or password.";
-        }
+        } 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -47,14 +45,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="body-login">
     <div>
-        <h2>Login</h2>
+
         <form class="login-form" action="" method="post">
+            <h2>Login</h2>
+            <p>Please fill out this form to log into your account!</p>
+            <hr>
+
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-
+            <input type="password" id="password" name="password" required>
+            <!-- Error Message Section -->
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($stmt->rowCount() !== 1) {
+                    echo '<span style="color: #d9534f; font-size: 14px;">Invalid username or password.</span>';
+                }
+            }
+            ?>
             <button type="submit" name="login">Login</button>
         </form>
     </div>

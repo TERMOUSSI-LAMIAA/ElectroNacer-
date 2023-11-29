@@ -20,9 +20,10 @@ include 'db.php';
 <body class="body-home">
     <nav>
         <div class="logo">
-        <img src="assets/imgs/logo1.png" alt="logo" height="60" width="60"><p>ElectroNacer</p>
+            <img src="assets/imgs/logo1.png" alt="logo" height="60" width="60">
+            <p>ElectroNacer</p>
         </div>
-       
+
         <div>
             <p>+212601020304</p>
             <p>electro_nacer@gmail.com</p>
@@ -38,8 +39,8 @@ include 'db.php';
                 <option value="3">composants electroniques</option>
             </select>
 
-            <p><a href="?showOutOfStock=true">Les produits en rupture de stock</a></p>
-            <p>Déconnexion</p>
+            <a href="?showOutOfStock=true">Les produits en rupture de stock</a>
+            <a href="logout.php">Déconnexion</a>
         </div>
 
         <div class="main-content" id="productList">
@@ -48,34 +49,15 @@ include 'db.php';
             $statement = $pdo->prepare($query);
             $statement->execute();
             $result = $statement->fetchAll();
-            if ($result) {
-                foreach ($result as $row) {
-                    $isOutOfStock = $row['qte_stock'] <= $row['qte_min'];
-                    if (isset($_GET['showOutOfStock']) && $_GET['showOutOfStock'] == 'true' && $isOutOfStock) {
-                        ?>
 
-                        <div class="product category-<?= $row['fk_idCat'] ?>">
-                            <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300"
-                                height="300">
-                            <p>Libelle:
-                                <?= $row['libelle'] ?>
-                            </p>
-                            <p>Reference:
-                                <?= $row['ref_prod'] ?>
-                            </p>
-                            <p>Prix unitaire:
-                                <?= $row['pru'] ?>
-                            </p>
-                            <p>Quantité minimale:
-                                <?= $row['qte_min'] ?>
-                            </p>
-                            <p>Quantité stock:
-                                <?= $row['qte_stock'] ?>
-                            </p>
-                        </div>
+            $showOutOfStock = isset($_GET['showOutOfStock']);
 
-                        <?php
-                    } elseif (!isset($_GET['showOutOfStock']) && !$isOutOfStock) {
+            if ($showOutOfStock) {
+                $outOfStockProducts = array_filter($result, function ($row) {
+                    return $row['qte_stock'] <= $row['qte_min'];
+                });
+                if (!empty($outOfStockProducts)) {
+                    foreach ($outOfStockProducts as $row) {
                         ?>
                         <div class="product category-<?= $row['fk_idCat'] ?>">
                             <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300"
@@ -89,21 +71,56 @@ include 'db.php';
                             <p>Prix unitaire:
                                 <?= $row['pru'] ?>
                             </p>
-                            <p>Quantité minimale:
-                                <?= $row['qte_min'] ?>
-                            </p>
                             <p>Quantité stock:
                                 <?= $row['qte_stock'] ?>
                             </p>
                         </div>
+
                         <?php
                     }
+                } else {
+                    ?>
+                    <p>No out-of-stock products found</p>
+                    <?php
                 }
             } else {
-                ?>
-                <p>no record found</p>
-                <?php
+                if ($result) {
+                    foreach ($result as $row) {
+                        ?>
+                        <div class="product category-<?= $row['fk_idCat'] ?>">
+                            <img src="data:image/jpg;base64,<?= base64_encode($row['image']) ?>" alt="Product Image" width="300"
+                                height="300">
+                            <p>Libelle:
+                                <?= $row['libelle'] ?>
+                            </p>
+                            <p>Reference:
+                                <?= $row['ref_prod'] ?>
+                            </p>
+                            <p>Prix unitaire:
+                                <?= $row['pru'] ?>
+                            </p>
+                            <p>Quantité minimale:
+                                <?= $row['qte_min'] ?>
+                            </p>
+                            <p>Quantité stock:
+                                <?= $row['qte_stock'] ?>
+                            </p>
+                        </div>
+
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <p>no record found</p>
+                    <?php
+                }
+
             }
+
+
+
+
+
             ?>
         </div>
     </section>
@@ -113,7 +130,10 @@ include 'db.php';
 
 
 
-    <footer>
+    <footer style="color:white;background-color:rgb(3, 56, 26);text-align: center;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;">
         <p>copyright ElectroNAcer 2023</p>
     </footer>
 
