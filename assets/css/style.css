@@ -1,200 +1,190 @@
-@import url("https://fonts.googleapis.com/css2?family=Electrolize&family=Inter+Tight&family=Inter:wght@300;400;500;700&family=Irish+Grover&family=Josefin+Sans&family=Kavoon&family=Leckerli+One&family=Mulish:wght@500&family=Oleo+Script&family=Playfair+Display&display=swap");
-
-/* login page */
-.body-login {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Add the following styles to your 'style.css' file */
+.sidebar {
   height: 100vh;
-
-  flex-direction: column;
-  min-height: 100vh;
-}
-.body-login div {
-  border: 1px solid white;
-  border-radius: 20px;
-  height: 300px;
-  width: 300px;
-  padding: 100px 100px;
-  background-color: white;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 220px;
+  padding-top: 15px;
+  background: linear-gradient(to bottom, #2c3e50, #34495e);
+  color: #ecf0f1;
+  transition: width 0.3s;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
+.sidebar a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
-.login-form label {
-  margin-bottom: 8px;
+.sidebar a:hover {
+  background-color: #2980b9;
+}
+
+.sidebar-sticky {
+  padding-top: 20px;
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #bdc3c7;
+}
+
+.main-content {
+  margin-top: 20px;
+  transition: margin-left 0.3s;
+}
+
+/* Optional: Add a box shadow to the main content for depth */
+.main-content {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Query for smaller screens */
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar a span {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 60px;
+  }
+
+  .sidebar.collapsed {
+    width: 60px;
+  }
+
+  .sidebar.collapsed:hover {
+    width: 220px;
+  }
+
+  .sidebar.collapsed .sidebar-heading,
+  .sidebar.collapsed a span {
+    display: none;
+  }
+
+  .sidebar.collapsed .sidebar-heading {
+    display: block;
+    text-align: center;
+  }
+}
+/*---------------------*/
+/* Add the following styles to your 'style.css' file */
+
+.card {
+  margin-top: 40px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
   color: #555;
 }
 
-.login-form input {
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
-.login-form button {
-  padding: 10px;
-  background-color: #12861a;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+/******************/
+/* Add the following styles to your 'style.css' file */
+
+.navbar {
+  background-color: #3498db; /* Change this color to your preferred background color */
+  padding: 10px 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
 }
 
-.login-form button:hover {
-  background-color: #095820;
-}
-/* ------------------------------------------home page --------------------------------*/
-/* .body-home {
-  font-family: Arial, sans-serif;
-  margin: 0;
-}*/
-nav p {
-  color: #3acca3;
-}
-.logo p {
-  margin-left: -40px;
-  margin-top: 10px;
-  color: #3acca3;
-  font-family: Electrolize;
-  font-size: 24px;
-}
-nav {
-  background-color: rgb(3, 56, 26);
-  color: #fff;
-  padding: 10px;
+.navbar-brand {
   display: flex;
-  justify-content: space-between;
-  padding-left: 50px;
-  padding-right: 50px;
   align-items: center;
-}
-nav div {
-  display: flex;
-  gap: 50px;
-} 
-/* sidebar */
-
-/* .wrapper {
-  display: flex;
+  color: #ffffff; /* Change this color to your preferred text color */
+  font-weight: bold;
 }
 
-.sidebar {
-  background-color: #a44141;
-  padding: 20px;
-  min-width: 200px;
+.navbar-brand img {
+  margin-right: 10px;
 }
 
-.sidebar select,
-.sidebar a,
-.sidebar p {
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #333;
+.navbar-toggler {
+  border-color: #ffffff; /* Change this color to your preferred text color */
 }
 
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
+.navbar-toggler-icon {
+  background-color: #ffffff; /* Change this color to your preferred text color */
 }
 
-.product {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px;
-  text-align: center;
+.navbar-nav {
+  margin-left: auto;
 }
 
-.product img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ddd;
+.nav-item {
+  margin-right: 15px;
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
+.nav-link {
+  color: #ffffff; /* Change this color to your preferred text color */
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #f39c12; /* Change this color to your preferred hover color */
+}
+/*------------------*/
+/* Add the following styles to your 'style.css' file */
+
+.footer {
+  background-color: #34495e; /* Change this color to your preferred background color */
+  color: #ecf0f1; /* Change this color to your preferred text color */
   bottom: 0;
+  left: 0;
   width: 100%;
-} */
-.body-home {
-  margin: 0;
-  font-family: "Arial", sans-serif;
-  background-color: rgb(61, 20, 20);
-  overflow-x: hidden;
 }
-
-.wrapper {
-  display: flex;
-  
-
-}
-
-.sidebar {
+body{
+  background-color: #2980b9;
   min-height: 100vh;
-  width: 500px;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(16, 194, 81, 0.5);
 }
-
-#categories {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 80px;
-  margin-top: 20px;
-}
-
-a {
-  color: #fff;
+.footer a {
+  color: #ecf0f1; /* Change this color to your preferred link color */
   text-decoration: none;
-  display: block;
-  margin-bottom: 50px;
-}
-.sidebar a{
-  padding: 30px;
-   cursor: pointer;
-}
-.sidebar a:hover{
-  background-color: rgb(61, 20, 20);
-}
-.sidebar a:focus{
-  background-color: rgb(61, 20, 20);
-}
-.main-content {
-display: flex;
-flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  margin-left: 20px;
+  transition: color 0.3s;
 }
 
-.product {
-  
-  width: 300px;
-  border-radius: 20px;
-  border: 2px solid #ddd;
-  padding: 20px;
-  margin: 20px;
-  /* margin-bottom: 20px; */
-  background-color: #ffffff;
-  box-sizing: border-box;
+.footer a:hover {
+  color: #3498db; /* Change this color to your preferred link hover color */
 }
-
-.product img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 5px;
+#main-content{
+  display: flex;
+  flex-wrap: wrap;
 }
-
