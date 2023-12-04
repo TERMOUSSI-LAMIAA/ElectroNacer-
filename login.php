@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     try {
-        // Update column names in the query
         $query = "SELECT * FROM utilisateur WHERE username = :username AND psword = :password";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':username', $username);
@@ -22,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $username;
 
             header("Location: index.php");
-            exit();
+            exit();//Arrête l'exécution du script.
         } 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 
-    $pdo = null;
+    $pdo = null;// Ferme la connexion PDO à la base de données.
 }
 
 

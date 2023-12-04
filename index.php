@@ -2,29 +2,23 @@
 session_start();
 include 'db.php';
 
-// Handle different views based on the 'view' parameter
 if (isset($_GET['view'])) {
     $view = $_GET['view'];
 
     switch ($view) {
         case 'all_products':
-            // Fetch all products from the database
             $sql = "SELECT * FROM produit";
             break;
         case 'out_of_stock':
-            // Fetch products with qte_stock less than 3
             $sql = "SELECT * FROM produit WHERE qte_stock <= qte_min";
             break;
         default:
-            // Fetch products based on the selected category
             $category = $pdo->quote($view);
             $sql = "SELECT * FROM produit WHERE fk_idCat = (SELECT idCat FROM categorie WHERE nomCat = $category)";
             break;
     }
 
     $result = $pdo->query($sql);
-
-    // Display the products
     if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo '<div class="col-md-4 mb-4">
@@ -39,12 +33,12 @@ if (isset($_GET['view'])) {
                     </div>
                 </div>';
         }
-    } else {
+    } 
+    else {
         echo '<div class="alert alert-info" role="alert" style=margin:60px ;>
         <strong>No electronic products found!</strong> 
       </div>';
     }
-    // Stop further execution to prevent rendering the rest of the page
     exit();
 }
 ?>
@@ -83,7 +77,7 @@ if (isset($_GET['view'])) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Logout</a>
+                    <a class="nav-link" >electronacer@gmail.com</a>
                 </li>
             </ul>
         </div>

@@ -1,3 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Electrolize&family=Inter+Tight&family=Inter:wght@300;400;500;700&family=Irish+Grover&family=Josefin+Sans&family=Kavoon&family=Leckerli+One&family=Mulish:wght@500&family=Oleo+Script&family=Playfair+Display&display=swap");
+
+/* login page */
+.body-login {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  flex-direction: column;
+  min-height: 100vh;
+}
+.body-login div {
+  border: 1px solid white;
+  border-radius: 20px;
+  height: 300px;
+  width: 300px;
+  padding: 100px 100px;
+  background-color: white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.login-form input {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #12861a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #095820;
+}
 /* Add the following styles to your 'style.css' file */
 .sidebar {
   height: 100vh;
@@ -10,7 +63,9 @@
   color: #ecf0f1;
   transition: width 0.3s;
 }
-
+.sidebar.fixed {
+  top: 0;
+}
 .sidebar a {
   color: #ecf0f1;
   text-decoration: none;
@@ -122,7 +177,6 @@
   background-color: #3498db; /* Change this color to your preferred background color */
   padding: 10px 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
 }
 
 .navbar-brand {
@@ -171,7 +225,9 @@
   left: 0;
   width: 100%;
 }
-body{
+body {
+  display: flex;
+  flex-direction: column;
   background-color: #2980b9;
   min-height: 100vh;
 }
@@ -182,9 +238,10 @@ body{
 }
 
 .footer a:hover {
-  color: #3498db; /* Change this color to your preferred link hover color */
+  color: #3498db;
+  /* Change this color to your preferred link hover color */
 }
-#main-content{
+#main-content {
   display: flex;
   flex-wrap: wrap;
 }

@@ -1,36 +1,16 @@
-// function filterProducts() {
-    
-//     var selectedCategory = document.getElementById("categories").value;
-//     var products = document.getElementsByClassName("product");
 
-//     for (var i = 0; i < products.length; i++) {
-//         products[i].style.display = "none";
-//     }
-
-//     if (selectedCategory === "tout") {
-//         for (var i = 0; i < products.length; i++) {
-//             products[i].style.display = "block";
-//         }
-//     } else {
-//         var selectedCategoryProducts = document.getElementsByClassName("category-" + selectedCategory);
-//         for (var i = 0; i < selectedCategoryProducts.length; i++) {
-//             selectedCategoryProducts[i].style.display = "block";
-//         }
-//     }
-// }
-/**
- * Created by Kupletsky Sergey on 17.10.14.
- *
- * Material Sidebar (Profile menu)
- * Tested on Win8.1 with browsers: Chrome 37, Firefox 32, Opera 25, IE 11, Safari 5.1.7
- * You can use this sidebar in Bootstrap (v3) projects. HTML-markup like Navbar bootstrap component will make your work easier.
- * Dropdown menu and sidebar toggle button works with JQuery and Bootstrap.min.js
- */
-
-// Sidebar toggle
-//
 // -------------------
 $(document).ready(function() {
+    var sidebar = $(".sidebar");
+      var sidebarTop = sidebar.offset().top;
+
+      $(window).scroll(function() {
+        if ($(window).scrollTop() > sidebarTop) {
+          sidebar.addClass("fixed");
+        } else {
+          sidebar.removeClass("fixed");
+        }
+      });
     var overlay = $('.sidebar-overlay');
 
     $('.sidebar-toggle').on('click', function() {
@@ -77,25 +57,6 @@ $(document).ready(function () {
     });
 });
 /*database*/
-// document.addEventListener('DOMContentLoaded', function () {
-//     var mainContent = document.getElementById('main-content');
-
-//     // Add a click event listener to the link
-//     document.querySelector('.nav-link.active').addEventListener('click', function (event) {
-//         // Prevent the default link behavior
-//         event.preventDefault();
-
-//         // Load the content of all_products.php into the main content area
-//         fetch('?view=all_products')
-//             .then(response => response.text())
-//             .then(data => {
-//                 mainContent.innerHTML = data;
-//             })
-//             .catch(error => {
-//                 console.error('Error fetching data:', error);
-//             });
-//     });
-// });
 document.addEventListener('DOMContentLoaded', function () {
     var mainContent = document.getElementById('main-content');
     var navLinks = document.querySelectorAll('.nav-link');
