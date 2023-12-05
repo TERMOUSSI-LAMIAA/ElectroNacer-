@@ -43,7 +43,8 @@ INSERT INTO produit (ref_prod, image, libelle, pru, qte_min, qte_stock, fk_idCat
 
 
 
-
+DELETE FROM produit WHERE ref_prod = 'ref1040';
+UPDATE produit SET qte_stock = 60 WHERE ref_prod = 1040;
 
 
 

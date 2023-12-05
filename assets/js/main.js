@@ -35,7 +35,7 @@ $(document).ready(function() {
 function htmlbodyHeightUpdate() {
     var height3 = $(window).height();
     var height1 = $('.nav').height() + 50;
-    height2 = $('.container-main').height();
+    height2 = $('.container-main').heig<ht();
     if (height2 > height3) {
         $('html').height(Math.max(height1, height3, height2) + 10);
         $('body').height(Math.max(height1, height3, height2) + 10);
@@ -56,46 +56,31 @@ $(document).ready(function () {
         htmlbodyHeightUpdate();
     });
 });
+// requêtes asynchrones
 /*database*/
-document.addEventListener('DOMContentLoaded', function () {
-    var mainContent = document.getElementById('main-content');
-    var navLinks = document.querySelectorAll('.nav-link');
-
-    // Function to load content based on the view
-    function loadContent(view) {
-        fetch('?view=' + view)
-            .then(response => response.text())
-            .then(data => {
-                mainContent.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }
-
-    // Add a click event listener to each navigation link
-    navLinks.forEach(function (link) {
-        link.addEventListener('click', function (event) {
-            // Prevent the default link behavior
-            event.preventDefault();
-
-            // Remove the 'active' class from all links
-            navLinks.forEach(function (navLink) {
-                navLink.classList.remove('active');
-            });
-
-            // Add the 'active' class to the clicked link
-            link.classList.add('active');
-
-            // Determine the view based on the clicked link
-            var view = link.getAttribute('data-view');
-
-            // Load the content based on the view
-            loadContent(view);
-        });
+$(document).ready(function () {
+    // Handle click events on navigation links
+    $('.nav-link').on('click', function (e) {
+        e.preventDefault();
+        var view = $(this).data('view');
+        loadProducts(view);
     });
 
-    // Load all products on page loading
-    loadContent('all_products');
-});
+    // Initial load with 'all_products' view
+    loadProducts('all_products');
 
+    // Function to load products based on the selected view
+    function loadProducts(view) {
+        $.ajax({
+            url: 'index.php',
+            type: 'GET',
+            data: { view: view },
+            success: function (response) {
+                $('#main-content').html(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+});
